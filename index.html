@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>Document</title>
+</head>
+<body class="conteiner">
+    <div id="note" class="card" v-cloak>
+        <h1 
+            :style="{ 
+                color: inputValue.length < 5 ? 'darkred' : 'darkblue',
+                fontSize: inputValue.length < 5 ? '2rem' : '1.5rem'
+            }"
+        >
+            {{ title }}
+        </h1>
+        <div class="form-control">
+            <input
+                type="text" 
+                :placeholder="placeholder" 
+                v-model="inputValue"
+                @keypress.enter="addNewNote"
+            >
+        </div>
+        <button class="btn" @click="addNewNote">ADD</button>
+        <hr>
+        <ul class="List" v-if="notes.length">
+            <li class="list-item" v-for="(note, index) in notes">
+                {{ toUpperCase(note) }}
+                <button class="btn danger" @click="removeNote(index)">DEL</button>
+            </li>
+        </ul>
+        <div v-else>
+            <span>Пока заметок нет</span>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>
